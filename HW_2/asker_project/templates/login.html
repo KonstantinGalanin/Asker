@@ -1,0 +1,44 @@
+{% extends "inc/base.html" %} 
+
+{% block content %}
+<div class="mb-4">
+  <div class="left-top">
+    <h2 class="header-title current-title">Log In</h2>
+  </div>
+  <hr />
+</div>
+<div class="left-main">
+  <form>
+    <div class="form-group">
+      <label for="InputLogIn1">
+        <h2 class="generic-text">Login:</h2>
+      </label>
+      <input
+        type="login"
+        class="form-control"
+        id="InputLogIn1"
+        aria-describedby="LoginHelp"
+      />
+    </div>
+    <div class="form-group">
+      <label for="InputPassword1">
+        <h2 class="generic-text">Password:</h2>
+      </label>
+      <input
+        type="password"
+        class="form-control"
+        id="InputPassword1"
+        aria-describedby="PasswordHelp"
+      />
+    </div>
+    <div class="error-message">Passwords or login do not match.</div>
+    <div class="form-bottom">
+      <button type="submit-new-question" class="btn btn-success">
+        Log In!
+      </button>
+      <a href="{% url "register"%}"> Create new account</a>
+    </div>
+    
+  </form>
+</div>
+{% endblock content %}

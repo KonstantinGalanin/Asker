@@ -1,0 +1,32 @@
+<article class="card">
+    <a href="#" class="person mb-2">
+      <img
+        src=" {{ answer.img_address }} ",
+        alt=""
+        class="image-avatar rounded-image"
+      />
+      <div class="name-item"> {{ answer.author }} </div>
+    </a>
+    <div class="card-text"> {{ answer.text }} </div>
+    <div class="bottom">
+      <div class="bottom-left">
+        <div class="form-check">
+          <input
+            class="form-check-input bg-success"
+            type="checkbox"
+            value=""
+            id="RightAnswer1"
+          />
+          <label class="form-check-label" for="RightAnswer1">
+            Right Answer
+          </label>
+        </div>
+      </div>
+      <div class="bottom-right">
+        <button type="button" class="btn btn-outline-dark like">
+          {{ answer.like_count }}
+        </button>
+      </div>
+    </div>
+    <hr />
+  </article>
