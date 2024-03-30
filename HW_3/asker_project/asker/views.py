@@ -5,16 +5,19 @@ from django.http import Http404, HttpResponseNotFound
 import math
 # Create your views here.
 
+def update_question_fields():
+    questions = Question.objects.all()
+    for question in questions:
+        Question.objects.update_answer_count(question)
+        Question.objects.update_like_count(question)
+
 def paginate(request, objects, per_page=5):
     page = request.GET.get('page', 1)
     paginator = Paginator(objects, per_page)
     return paginator.get_page(page)
 
 def index(request):
-    questions = Question.objects.all()
-    for question in questions:
-        Question.objects.update_answer_count(question)
-        Question.objects.update_like_count(question)
+    update_question_fields()
     context = {'questions' : paginate(request, Question.objects.new()),
                'tags' : Tag.objects.popular_tags(),
                'best_members' : Profile.objects.best_members(),
@@ -29,26 +32,21 @@ def ask(request):
     return render(request, 'ask.html', context)
 
 def hot(request):
-    questions = Question.objects.all()
-    for question in questions:
-        Question.objects.update_answer_count(question)
-        Question.objects.update_like_count(question)
+    update_question_fields()
     context = {'questions' : paginate(request, Question.objects.hot()),
                'tags' : Tag.objects.popular_tags(),
                'best_members' : Profile.objects.best_members(),
                }
-    return render(request, 'hot.html', context) #
+    return render(request, 'hot.html', context)
 
-def login(request):
+def login(request):    
     context = {'tags' : Tag.objects.popular_tags(),
                'best_members' : Profile.objects.best_members(),
                }
     return render(request, 'login.html', context)
 
 def question(request, question_id):
-    question = Question.objects.get(pk=question_id)
-
-    context = {'question' : question,
+    context = {'question' : Question.objects.get(pk=question_id),
                'answers' : paginate(request, Answer.objects.hot(question)),
                'tags' : Tag.objects.popular_tags(),
                'best_members' : Profile.objects.best_members(),
@@ -70,11 +68,7 @@ def settings(request):
     return render(request, 'settings.html', context)
 
 def tag(request, tag_name):
-
-    target_tag = Tag.objects.get(title=tag_name)
-    questions_tag = Question.objects.filter(tags__title=tag_name)
-
-    context = {'questions' : paginate(request, questions_tag),
+    context = {'questions' : paginate(request, Question.objects.filter(tags__title=tag_name)),
                'tags' : Tag.objects.popular_tags(),
                'best_members' : Profile.objects.best_members(),
                'tag_name' : tag_name,

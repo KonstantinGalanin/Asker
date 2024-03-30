@@ -8,7 +8,7 @@
   <hr />
 </div>
 <div class="left-main">
-  <form>
+  <form action={% url "login" %} method="post">
     <div class="form-group">
       <label for="InputLogIn1">
         <h2 class="generic-text">Login:</h2>
@@ -16,6 +16,7 @@
       <input
         type="login"
         class="form-control"
+        name="username"
         id="InputLogIn1"
         aria-describedby="LoginHelp"
       />
@@ -27,6 +28,7 @@
       <input
         type="password"
         class="form-control"
+        name="password"
         id="InputPassword1"
         aria-describedby="PasswordHelp"
       />
