@@ -1,0 +1,46 @@
+{% extends "inc/base.html" %} 
+
+{% block content %}
+<div class="mb-4">
+  <div class="left-top">
+    <h2 class="header-title current-title">Question:</h2>
+  </div>
+  <hr class="mb-4" />
+
+  {% include "inc/question-item.html" %}  
+
+</div>
+
+<div class="left-main">
+  {% for answer in answers %}
+    {% include "inc/answer-item.html" %}  
+  {% endfor %}
+
+  <nav aria-label="...">
+    <ul class="pagination">
+      {% for page in answers.paginator.page_range %}
+        {% include "inc/page-item.html" %}
+      {% endfor %}
+    </ul>
+  </nav>
+
+  <form>
+    <div class="form-group mt-4">
+      <label for="InputText1"
+        ><h2 class="generic-text">Your Answer:</h2></label
+      >
+      <textarea
+        class="form-control"
+        id="InputText1"
+        rows="5"
+      ></textarea>
+    </div>
+
+    <button type="submit-new-answer" class="btn btn-success">
+      Submit
+    </button>
+  </form>
+
+</div>
+
+{% endblock content %}
