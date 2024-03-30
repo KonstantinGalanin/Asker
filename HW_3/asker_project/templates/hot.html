@@ -19,7 +19,12 @@
   {% endfor %}
 </div>
 
-{% include "inc/page-item.html" %}
-
+<nav aria-label="...">
+  <ul class="pagination">
+    {% for page in questions.paginator.page_range %}
+      {% include "inc/page-item.html" %}
+    {% endfor %}
+  </ul>
+</nav>
 
 {% endblock content %}
