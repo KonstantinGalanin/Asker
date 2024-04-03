@@ -3,20 +3,21 @@ from . import models
 from django.core.paginator import Paginator
 from django.http import Http404, HttpResponseNotFound
 import math
-# Create your views here.
 
 def paginate(objects, page, per_page):
+    try:
+        page = int(page)
+    except:
+        raise Http404()
+    
     paginator = Paginator(objects, per_page)
-    return paginator.page(page)
+    return paginator.get_page(page)
 
 def index(request):
     page = request.GET.get('page', 1)
     per_page = 5
     pages_count = math.ceil(len(models.QUESTIONS) / per_page) + 1
     pages_range = range(1, pages_count)
-    if(int(page) > pages_count):
-        return HttpResponseNotFound()
-        # raise Http404
 
     context = {'questions' : paginate(models.QUESTIONS, page, per_page),
                'pages_range' : pages_range,
@@ -37,8 +38,6 @@ def hot(request):
     per_page = 5
     pages_count = math.ceil(len(models.QUESTIONS) / per_page) + 1
     pages_range = range(1, pages_count)
-    if(int(page) > pages_count):
-        return HttpResponseNotFound()
 
     context = {'questions' : paginate(models.QUESTIONS, page, per_page),
                'pages_range' : pages_range,
@@ -68,14 +67,6 @@ def question(request, question_id):
                'best_members' : models.BEST_MEMBERS,
                }
     return render(request, 'question.html', context)
-
-# def question(request):
-#     context = {'tags' : models.TAGS,
-#                'pages' : models.PAGES,
-#                'questions' : models.QUESTIONS,
-#                'answers' : models.ANSWERS,
-#                }
-#     return render(request, 'question.html', context)
 
 def register(request):
     context = {'tags' : models.POPULAR_TAGS,
