@@ -1,8 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Profile, Question, Answer, Tag, LikeQuestion, LikeAnswer
 from django.core.paginator import Paginator
 from django.http import Http404, HttpResponseNotFound
-import math
 # Create your views here.
 
 def update_question_fields():
@@ -13,6 +12,10 @@ def update_question_fields():
 
 def paginate(request, objects, per_page=5):
     page = request.GET.get('page', 1)
+    try:
+        page = int(page)
+    except:
+        raise Http404()
     paginator = Paginator(objects, per_page)
     return paginator.get_page(page)
 
