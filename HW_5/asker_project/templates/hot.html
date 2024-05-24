@@ -1,0 +1,30 @@
+{% extends "inc/base.html" %} 
+
+{% block content %}
+<div class="mb-4">
+  <div class="left-top">
+    <a href="{% url "index"%}" class="link-title">
+      <h2 class="top-title">New Questions</h2>
+    </a>
+    <a href="{% url "hot"%}" class="link-title">
+      <h2 class="top-title current-title">Hot Questions</h2>
+    </a>
+  </div>
+  <hr />
+</div>
+
+<div class="left-main">
+  {% for question in items %} 
+    {% include "inc/question-item.html" %}  
+  {% endfor %}
+</div>
+
+<nav aria-label="...">
+  <ul class="pagination">
+    {% for page in items.paginator.page_range %}
+      {% include "inc/page-item.html" %}
+    {% endfor %}
+  </ul>
+</nav>
+
+{% endblock content %}

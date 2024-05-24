@@ -1,0 +1,238 @@
+@media screen and (min-width: 1441px)
+    body
+        font-size: 19px
+
+@media screen and (max-width: 991px)
+    body
+        font-size: 10px
+
+
+
+.navbar 
+    display: flex
+    justify-content: space-between
+    background-color: #333333
+    margin-bottom: 1rem
+    height: 4em
+    .navbar-right
+        padding-right: 7%
+    .navbar-brand
+        margin-left: 10%
+        font-size: 2.2rem
+        color: white
+    .nav-link
+        color: white !important
+        text-decoration: underline
+    .form-control
+        width: 25rem
+        border: none
+    .btn
+        background-color: #333333
+        &:hover
+            background-color: green
+
+.link-border
+    border-radius: 1.5rem
+    padding: 0.5rem 0.7rem
+    color: black
+    text-decoration: none
+    background-color: #f0f0f0
+    display: inline-block
+    &:hover
+        background-color: white
+
+.ask-link
+    background-color: #07890C
+    color: white
+    border: 1px solid #07890C
+    &:hover
+        background-color: #333333
+        color: #07890C
+
+.link-title
+    text-decoration: none
+    color: #292929
+    
+.round-border
+    border-radius: 1.5rem
+
+.main
+    margin-left: 10%
+    display: flex
+    justify-content: space-between
+
+.left-side
+    width: 57%
+    .left-top
+        display: flex
+        flex-direction: row
+        .top-title
+            font-weight: lighter
+            &:hover
+                font-weight: normal
+        .link-title
+            margin-right: 1rem
+            
+        &__btn
+            border: none
+            background: none
+            padding: 0
+            margin: 0 2rem 0 0
+            
+        .current-title
+            font-weight: normal
+
+.rounded-image
+    border-radius: 50%
+
+.left-main
+    max-width: 80%
+    .form-group
+        margin-bottom: 1rem
+
+.card
+    border: none
+    margin-bottom: 1.5rem
+    &__title
+        color: black
+    .card-text
+        max-height: 4.5em
+        overflow: hidden
+        text-overflow: ellipsis
+        width: 100%
+        margin-bottom: 1rem
+    .bottom
+        display: flex
+        justify-content: space-between
+        align-items: center
+        .bottom-left
+            display: flex
+            align-items: center
+            .tags-item
+                margin-right: 0.3rem
+        .bottom-right
+            padding-right: 1rem
+            display: flex
+            flex-direction: row
+            align-items: center
+            font-size: 1.1rem
+
+.person
+    display: flex
+    flex-direction: row
+    align-items: center
+    text-decoration: none
+    color: #292929
+    .image-avatar
+        object-fit: cover
+        width: 2.5rem
+        height: 2.5rem
+        margin-right: 0.5rem
+
+.top-image
+    object-fit: cover
+    width: 2rem
+    height: 2rem
+    margin-right: 0.5rem
+
+
+.grey-link
+    color: #757575
+    text-decoration: underline
+    
+.page-link 
+    color: black
+    font-size: 1.1rem
+
+.right-side
+    margin-right: 7%
+    width: 25%
+    border-left: 1px solid #F2F2F2
+    .popular-tags
+        padding-top: 0.6rem
+        margin-bottom: 3.2rem
+        .tags
+            padding-left: 10%
+            padding-right: 10%
+            display: grid
+            grid-template-columns: repeat(auto-fill, minmax(6.25rem, 1fr))
+            grid-gap: 0.6rem
+            white-space: nowrap
+            &__link
+                text-decoration: none
+                color: #292929
+
+                
+.right-title
+    margin-bottom: 1.9rem
+    text-align: center
+
+.member-block
+    padding-left: 10%
+    margin-bottom: 1.25rem
+
+.form-group
+    margin-bottom: 2rem !important
+    .text-form
+        min-height: 10rem     
+
+.generic-text
+    font-size: 1.5rem
+
+form
+    a
+        text-decoration: underline
+    .btn
+        margin-right: 1rem
+
+.form-bottom
+    display: flex
+    justify-content: space-between
+
+.upload-block
+    display: flex
+    align-items: center
+    .input-upload
+        display: none
+    label
+        display: inline-block
+        border: 1px solid black
+        padding: 0.5rem 2rem
+        font-size: 1rem
+        user-select: none
+        border-radius: 0.3rem
+        cursor: pointer
+
+.error-message 
+    color: red
+    font-size: .8rem
+    margin-top: 0.3rem
+
+.login-error
+    font-size: 1rem
+
+.liked
+    stroke: #333333 !important
+    fill: #333333 !important
+
+.like-button
+    background-color: transparent
+    border: none
+    padding: 0
+    margin: 0
+    font-size: 1rem
+    .icon
+        height: 3rem
+        width: 3rem
+        path
+            fill: transparent
+            stroke-width: 1px
+            stroke: #757575
+            &:hover
+                stroke: #333333
+                fill: #333333
+
+// .like
+//     border-color: #231919
+//     &:hover
+//         background-color: #333333

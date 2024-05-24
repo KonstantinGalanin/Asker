@@ -1,0 +1,25 @@
+{% extends "inc/base.html" %} 
+
+{% block content %}
+<div class="mb-4">
+  <div class="left-top">
+    <h2 class="header-title current-title">Tag:&nbsp</h2>
+    <h2 class="header-title"> {{ tag_name }} </h2>
+  </div>
+  <hr />
+</div>
+
+<div class="left-main">
+  {% for question in items %}
+    {% include "inc/question-item.html" %}
+  {% endfor %}
+</div>
+
+<nav aria-label="...">
+  <ul class="pagination">
+    {% for page in items.paginator.page_range %}
+      {% include "inc/page-item.html" %}
+    {% endfor %}
+  </ul>
+</nav>
+{% endblock  %}

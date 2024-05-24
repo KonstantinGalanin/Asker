@@ -1,0 +1,83 @@
+{% extends "inc/base.html" %} 
+
+{% block content %}
+
+<div class="mb-4">
+  <div class="left-top">
+    <h2 class="header-title current-title">Registration:</h2>
+  </div>
+  <hr />
+</div>
+<div class="left-main">
+  <form action={% url "register" %} method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for=" {{ form.username.id_for_label }} ">
+        <h2 class="generic-text">{{ form.username.label }}:</h2>
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        name = " {{ form.username.name }} "
+        id=" {{ form.username.id_for_label }} "
+        aria-describedby="LoginHelp"
+      />
+    </div>
+    <div class="form-group">
+      <label for=" {{ form.email.id_for_label }} ">
+        <h2 class="generic-text">{{ form.email.label }}:</h2>
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        name = " {{ form.email.name }} "
+        id=" {{ form.email.id_for_label }} "
+        aria-describedby="LoginHelp"
+      />
+    </div>
+    <div class="form-group">
+      <label for=" {{ form.password.id_for_label }} ">
+        <h2 class="generic-text">{{ form.password.label }}:</h2>
+      </label>
+      <input
+        type="password"
+        class="form-control"
+        name = " {{ form.password.name }} "
+        id=" {{ form.password.id_for_label }} "
+        aria-describedby="LoginHelp"
+      />
+    </div>
+    <div class="form-group">
+      <label for=" {{ form.password_check.id_for_label }} ">
+        <h2 class="generic-text">{{ form.password_check.label }}:</h2>
+      </label>
+      <input
+        type="password"
+        class="form-control"
+        name = " {{ form.password_check.name }} "
+        id=" {{ form.password_check.id_for_label }} "
+        aria-describedby="LoginHelp"
+      />
+    </div>
+    {% comment %} <div class="form-group upload-block">
+      <h2 class="generic-text me-2">Avatar:</h2>
+      <label for="fileUpload">Upload file</label>
+      <input
+        class="input-upload"
+        type="file"
+        id="fileUpload"
+        name="avatar"
+      />
+    </div> {% endcomment %}
+    {% if form.errors %}
+      <div class="error-message login-error mb-2">Passwords or login do not match.</div>
+    {% endif %}
+    <div class="form-bottom mb-4">
+      <button type="submit" class="btn btn-success">
+        Register!
+      </button>
+    </div>
+  </form>
+</div>
+
+{% endblock content %}
