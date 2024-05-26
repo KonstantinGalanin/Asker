@@ -22,6 +22,9 @@ class QuestionManager(models.Manager):
 class Answermanager(models.Manager):
     def hot(self, question):
         return self.filter(question=question).order_by("-like_count")
+    def right_answer(self, answer):
+        answer.correct = not answer.correct
+        answer.save()
     
 class ProfileManager(models.Manager):
     def best_members(self):
@@ -73,6 +76,7 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     text = models.TextField()
     like_count = models.IntegerField(default=0)
+    correct = models.BooleanField(default=False)
 
     objects = Answermanager()
 
@@ -83,7 +87,6 @@ class Answer(models.Model):
 class LikeQuestion(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    is_liked = models.BooleanField(default="False")
 
     objects = LikeQuestionManager()
 
@@ -96,7 +99,6 @@ class LikeQuestion(models.Model):
 class LikeAnswer(models.Model):
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    is_liked = models.BooleanField(default="False")
 
     objects = LikeAnswerManager()
 

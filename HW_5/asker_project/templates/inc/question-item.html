@@ -1,5 +1,5 @@
 {% load static %}
-<article class="card" data-question-id="{{ question.id }}">
+<article class="card question-card" data-question-id="{{ question.id }}">
     <a href="#" class="person">
       <img
       {% if question.author.avatar %}
@@ -46,9 +46,6 @@
         </div>
         <button type="button" class="like-button">
           <div class="icon like">
-            {% if not user.is_authenticated  %}
-              
-            {% endif %}
             <svg viewBox="50 50 400 400" style="color:currentColor" xmlns="http://www.w3.org/2000/svg" class="h-full w-full"><svg width="280px" height="280px" viewBox="-1 0 18 16" fill="currentColor" x="128" y="128" role="img" style="display:inline-block;vertical-align:middle" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path fill="currentColor" fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15C-7.534 4.736 3.562-3.248 8 1.314z"/></g></svg></svg>
           </div>
         </button>

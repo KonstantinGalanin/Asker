@@ -15,13 +15,12 @@ function getCookie(name) {
 }
 
 const init = () => {
-    const cards = document.querySelectorAll('.card')
-
+    const cards = document.querySelectorAll('.question-card')
     for(const card of cards) {
+        console.log(1)
         const like_button = card.querySelector('.like-button')
         const like_counter = card.querySelector('.like-counter')
         const question_id = card.dataset.questionId
-
 
         like_button.addEventListener('click', () => {
             // const request_url = 'like_question'
@@ -45,7 +44,7 @@ const init = () => {
                         window.location.href = '/login'
                     }
                     else {
-                        response.json()
+                        return response.json()
                     }
                 })
                 .then((data) => like_counter.innerHTML = data.likes_count)
@@ -53,8 +52,69 @@ const init = () => {
     }
 
 
+    const answer_cards = document.querySelectorAll('.answer-card')
+    for(const card of answer_cards) {
+        
+        const like_button = card.querySelector('.like-button')
+        const like_counter = card.querySelector('.like-counter')
+        const answer_id = card.dataset.answerId
 
-    
+        like_button.addEventListener('click', () => {
+            const request = new Request(`/like_answer/`, {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                body: JSON.stringify({
+                    answer_id: answer_id
+                })
+            })
+            fetch(request)
+                .then((response) => {
+                    if(response.status === 401) {
+                        window.location.href = '/login'
+                    }
+                    else {
+                        return response.json()
+                    }
+                })
+                .then((data) => like_counter.innerHTML = data.likes_count)
+        })
+    }
+
+
+    const right_labels = document.querySelectorAll('.form-check-input')
+    for(const label of right_labels) {
+
+        label.addEventListener('click', () => {
+            const question_id = label.dataset.questionId
+            const answer_id = label.dataset.answerId
+            console.log(question_id)
+
+            const request = new Request(`/right_answer/`, {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                body: JSON.stringify({
+                    question_id: question_id,
+                    answer_id: answer_id
+                })
+            })
+            fetch(request)
+                .then((response) => {
+                    if(response.status === 401) {
+                        window.location.href = '/login'
+                    }
+                    else {
+                        return response.json()
+                    }
+                })
+                .then((data) => label.checked = data.right_answer)
+            })
+    }
 }
 
 

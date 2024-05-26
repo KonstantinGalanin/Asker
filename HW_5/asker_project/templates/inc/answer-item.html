@@ -1,4 +1,4 @@
-<article class="card">
+<article class="card answer-card" data-answer-id="{{ answer.id }}">
     <a href="#" class="person mb-2">
       <img
         {% if answer.author %}
@@ -17,18 +17,25 @@
         <div class="form-check">
           <input
             class="form-check-input bg-success"
+            data-question-id="{{ question.id }}"
+            data-answer-id="{{ answer.id }}"
             type="checkbox"
             value=""
             id="RightAnswer1"
+            {% if answer.correct %}
+              checked
+            {% endif %}
           />
-          <label class="form-check-label" for="RightAnswer1">
+          <label class="form-check-label" data-right-answer="{{ answer.id }}" for="RightAnswer1">
             Right Answer
           </label>
         </div>
       </div>
       <div class="bottom-right">
         <div>
-        {{ answer.like_count }}
+          <span class="like-counter">
+            {{ answer.like_count }}
+          </span>
         </div>
         <button type="button" class="like-button">
           <div class="icon like">

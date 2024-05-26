@@ -11,5 +11,7 @@ urlpatterns = [
     path('register/', views.register, name="register"),
     path('settings/', views.settings, name="settings"),
     path('tag/<str:tag_name>', views.tag, name="tag"),
-    path('like_question/', views.like_question, name="like_question")
+    path('like_question/', views.like_question, name="like_question"),
+    path('like_answer/', views.like_answer, name="like_answer"),
+    path('right_answer/', views.right_answer, name="right_answer")
 ]

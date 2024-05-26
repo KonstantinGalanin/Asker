@@ -208,4 +208,37 @@ def like_answer(request):
     profile = request.user.profile
 
     body_request = json.loads(request.body)
-    # answer_id = 
+    answer_id = body_request['answer_id']
+    answer = get_object_or_404(Answer, pk=answer_id)
+
+    like, like_created = LikeAnswer.objects.get_or_create(answer=answer, user=profile)
+
+    if not like_created:
+        like.delete()
+        
+    body_response = {}
+    body_response['likes_count'] = LikeAnswer.objects.filter(answer=answer).count()
+    return JsonResponse(body_response)
+
+@require_http_methods(['POST'])
+@csrf_protect
+def right_answer(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'Not authenticated'}, status=401)
+
+    body_request = json.loads(request.body)
+
+    question_id = body_request['question_id']
+    question = Question.objects.get(pk=question_id)
+    author = question.author
+    answer_id = body_request['answer_id']
+
+    profile = request.user.profile
+    body_response = {}
+    body_response['right_answer'] = False
+    if(str(author) == str(profile)):
+        answer = Answer.objects.get(pk=answer_id)
+        body_response['right_answer'] = not answer.correct
+        Answer.objects.right_answer(answer)
+
+    return JsonResponse(body_response)

@@ -22,6 +22,11 @@
         name="{{ form.username.name }}"
         aria-describedby="LoginHelp"
       />
+      {% if form.username.errors %}
+          <div class="error-message login-error mb-2">
+              {{ form.username.errors.0 }}
+          </div>
+      {% endif %}
     </div>
     <div class="form-group">
       <label for="{{ form.email.id_for_label }}">
@@ -34,6 +39,11 @@
         name="{{ form.email.name }}"
         aria-describedby="EmailHelp"
       />
+      {% if form.email.errors %}
+          <div class="error-message login-error mb-2">
+              {{ form.email.errors.0 }}
+          </div>
+      {% endif %}
     </div>
     {% comment %} <div class="form-group">
       <label for="InputNickname1">
@@ -55,6 +65,11 @@
         id="{{ form.avatar.id_for_label }}"
         name="avatar"
       />
+      {% if form.avatar.errors %}
+          <div class="error-message login-error mb-2">
+              {{ form.avatar.errors.0 }}
+          </div>
+      {% endif %}
     </div>
     <div class="form-bottom">
       <button type="submit" class="btn btn-success">
