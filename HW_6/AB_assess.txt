@@ -1,0 +1,43 @@
+Отдача статического документа напрямую через nginx;
+ab -n 2000 http://127.0.0.1/static/css/styles.css
+Server Software:        nginx/1.25.5
+Time taken for tests:   0.174 seconds
+Complete requests:      2000
+Requests per second:    11506.16 [#/sec] (mean)
+Time per request:       0.087 [ms] (mean)
+
+Отдача статического документа напрямую через gunicorn
+ab -n 2000 http://127.0.0.1:8081/static/css/styles.css
+Server Software:        gunicorn
+Time taken for tests:   1.410 seconds
+Complete requests:      2000
+Requests per second:    1418.68 [#/sec] (mean)
+Time per request:       0.705 [ms] (mean)
+
+-- Через nginx статика отдается 8,1 раза быстрее --
+
+Отдача динамического документа напрямую через gunicorn;
+ab -n 2000 http://127.0.0.1:8081/hot/
+Server Software:        gunicorn
+Time taken for tests:   63.999 seconds
+Complete requests:      2000
+Requests per second:    31.25 [#/sec] (mean)
+Time per request:       32.000 [ms] (mean)
+
+Отдача динамического документа через проксирование запроса с nginx на gunicorn;
+ab -n 2000 http://127.0.0.1/hot/ 
+Server Software:        nginx/1.25.5
+Time taken for tests:   62.141 seconds
+Complete requests:      2000
+Requests per second:    32.18 [#/sec] (mean)
+Time per request:       31.070 [ms] (mean)
+
+Отдача динамического документа через проксирование запроса с nginx на gunicorn, при кэшировние ответа на nginx (proxy cache).
+ab -n 2000 http://127.0.0.1/hot/
+Server Software:        nginx/1.25.5
+Time taken for tests:   60.819 seconds
+Complete requests:      2000
+Requests per second:    32.88 [#/sec] (mean)
+Time per request:       30.409 [ms] (mean)
+
+-- Разница не особо большая, возможно стоило большее количество тестов поставить --

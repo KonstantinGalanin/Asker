@@ -1,0 +1,42 @@
+proxy_cache_path /Users/konstantingalanin/vk_education/projects/Asker/HW_6/asker_project/nginx_cache levels=1:2 keys_zone=my_cache:10m max_size=10g inactive=60m use_temp_path=off;
+
+upstream asker_project {
+    server 127.0.0.1:8081;
+}
+
+server {
+    listen 80 default_server;
+    server_name asker_project.com;
+
+    access_log /Users/konstantingalanin/log/nginx/access.log;
+    error_log /Users/konstantingalanin/log/nginx/error.log;
+
+
+    location /static/ {
+        gzip on;
+        gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml;
+        gzip_min_length 1000;
+        root /Users/konstantingalanin/vk_education/projects/Asker/HW_6/asker_project/;
+        expires 10d;
+        add_header Cache-Control "public";
+    }
+
+    location /media/ {
+        gzip on;
+        gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml;
+        gzip_min_length 1000;
+    	root /Users/konstantingalanin/vk_education/projects/Asker/HW_6/asker_project/;
+        expires 10d;
+        add_header Cache-Control "public";
+    }
+
+    
+
+
+    location / {
+        proxy_pass http://asker_project;
+        proxy_cache my_cache;
+        proxy_cache_valid any 10m;
+        proxy_set_header Host $host;
+    }
+}

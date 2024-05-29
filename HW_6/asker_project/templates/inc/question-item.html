@@ -1,0 +1,55 @@
+{% load static %}
+<article class="card question-card" data-question-id="{{ question.id }}">
+    <a href="#" class="person">
+      <img
+      {% if question.author.avatar %}
+        src=" {{ question.author.avatar.url }} ",
+      {% else %}
+        src="../media/avatars/no_photo.jpeg",
+      {% endif %}
+        alt=""
+        class="image-avatar rounded-image"
+      />
+      <div class="name-item"> {{ question.author.user.username }} </div>
+    </a>
+    <h2>
+      <a href="{% url "question" question.id %}" class="card__title">
+
+        {{ question.title }}
+
+      </a>
+    </h2>
+    <div class="card-text">
+
+        {{ question.text }} 
+
+    </div>
+    <div class="bottom">
+      <div class="bottom-left">
+        <a href="{% url "question" question.id %}" class="grey-link link-border me-2">
+          Answers({{ question.answer_count }})
+        </a>
+        <span class="tags-item">Tags: </span>
+        <div class="tags-item">
+
+          {% for tag in question.tags.all %}
+            <a href="{% url "tag" tag.title %}" class="grey-link">{{tag.title}}</a>
+          {% endfor %}
+
+        </div>
+      </div>
+      <div class="bottom-right">
+        <div>
+          <span class="like-counter">
+            {{ question.like_count }}
+          </span>
+        </div>
+        <button type="button" class="like-button">
+          <div class="icon like">
+            <svg viewBox="50 50 400 400" style="color:currentColor" xmlns="http://www.w3.org/2000/svg" class="h-full w-full"><svg width="280px" height="280px" viewBox="-1 0 18 16" fill="currentColor" x="128" y="128" role="img" style="display:inline-block;vertical-align:middle" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path fill="currentColor" fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15C-7.534 4.736 3.562-3.248 8 1.314z"/></g></svg></svg>
+          </div>
+        </button>
+      </div>
+    </div>
+    <hr />
+  </article>
