@@ -40,4 +40,3 @@ Complete requests:      2000
 Requests per second:    32.88 [#/sec] (mean)
 Time per request:       30.409 [ms] (mean)
 
--- Разница не особо большая, возможно стоило большее количество тестов поставить --
